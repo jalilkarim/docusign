@@ -14,11 +14,11 @@ namespace qs_csharp.Pages
     public class EmbeddedSigning : PageModel
     {
         // Constants need to be set:
-        private const string accessToken = "{ACCESS_TOKEN}";
-        private const string accountId = "{ACCOUNT_ID}";
-        private const string signerName = "{USER_FULLNAME}";
-        private const string signerEmail = "{USER_EMAIL}";
-        private const string docName = "World_Wide_Corp_lorem.pdf";
+        private const string accessToken = "eyJ0eXAiOiJNVCIsImFsZyI6IlJTMjU2Iiwia2lkIjoiNjgxODVmZjEtNGU1MS00Y2U5LWFmMWMtNjg5ODEyMjAzMzE3In0.AQoAAAABAAUABwCA5k5qZKbWSAgAgCZyeKem1kgCAAvmCyXou1tFoib-l9kBPGoVAAEAAAAYAAEAAAAFAAAADQAkAAAAZjBmMjdmMGUtODU3ZC00YTcxLWE0ZGEtMzJjZWNhZTNhOTc4EgABAAAACwAAAGludGVyYWN0aXZlMAAAULZpZKbWSDcARWK2UOFk7kKfwmjL9SDEEA.YVy_uVXY01bSPXa05vpqHKHdsiJEIluKZOpLfQxxQrOj2dylPRVUIjtUSbfFpD63XnjlPQQ01AxJ1WH-LdDymIlJ48iFzQ-KwvWtj-_KZy5w8fGr5_zOL_ZXLkYWjnTFrd8P8iVHm-InBUpqKn6igz-1gV_YZ9PHMYd_MCfxyu89QPf-C8JuqefQ3hKjD4AlQJWvt4pwLEq0OURkuPkrnDpG9KRMxEaZUADnpiyNXgDViwyAqX_0T9ywjUrLAKuZD-nJge3_S9BPqw0OjTF8_ax8ty9-vlCdRJuz4ddlw10jhpgafXRXrvouljeMrs8p_9EHnhj25vW-JDcnemnVzg";
+        private const string accountId = "8076693";
+        private const string signerName = "Karim Jalil";
+        private const string signerEmail = "karim.jalil@accuv.com";
+        private const string docName = "NDA.pdf";
 
         // Additional constants
         private const string signerClientId = "1000";
@@ -47,7 +47,7 @@ namespace qs_csharp.Pages
             //    Create the document object
             Document document = new Document
             { DocumentBase64 = Convert.ToBase64String(ReadContent(docName)),
-              Name = "Lorem Ipsum", FileExtension = "pdf", DocumentId = "1"
+              Name = "Non-Disclosure Agreement", FileExtension = "pdf", DocumentId = "1"
             };
             Document[] documents = new Document[] { document };
 
@@ -59,8 +59,8 @@ namespace qs_csharp.Pages
 
             // Create the sign here tab (signing field on the document)
             SignHere signHereTab = new SignHere
-            { DocumentId = "1", PageNumber = "1", RecipientId = "1",
-              TabLabel = "Sign Here Tab", XPosition = "195", YPosition = "147"
+            { DocumentId = "1", PageNumber = "4", RecipientId = "1",
+              TabLabel = "Sign Here Tab", XPosition = "173", YPosition = "410"
             };
             SignHere[] signHereTabs = new SignHere[] { signHereTab };
 
@@ -72,7 +72,7 @@ namespace qs_csharp.Pages
             Recipients recipients = new Recipients { Signers = new List<Signer>(signers) };
             // Bring the objects together in the EnvelopeDefinition
             EnvelopeDefinition envelopeDefinition = new EnvelopeDefinition
-            { EmailSubject = "Please sign the document",
+            { EmailSubject = "Non-Disclosure Agreement",
               Documents = new List<Document>( documents ),
               Recipients = recipients,
               Status = "sent"
@@ -87,7 +87,8 @@ namespace qs_csharp.Pages
             // 3. Create Envelope Recipient View request obj
             string envelopeId = results.EnvelopeId;
             RecipientViewRequest viewOptions = new RecipientViewRequest
-            { ReturnUrl = returnUrl, ClientUserId = signerClientId,
+           {
+              ReturnUrl = returnUrl, ClientUserId = signerClientId,
               AuthenticationMethod = "none",
               UserName = signerName, Email = signerEmail
             };

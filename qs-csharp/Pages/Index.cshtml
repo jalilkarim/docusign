@@ -1,13 +1,63 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "DocuSign - AccuV Proof-of-concept";
 }
 
-<h2>C# Quick Start Examples</h2>
+<head>
+    <title>IFrame PowerForm Sample</title>
+    <style type="text/css">
+        body {
+            background-color: #fefdfc;
+        }
 
-<h4><a href="SendEnvelope">Send an envelope.</a> The signer will receive an email with the signing request.</h4>
-<h4><a href="EmbeddedSigning">Embedded Signing Ceremony.</a> Add a signing page to your web app.</h4>
-<h4><a href="ListEnvelopes">List envelopes.</a> Lists the user's envelopes and their status.</h4>
+        p.description {
+            width: 500px;
+            border: 1px solid #cfc;
+            padding: 20px;
+        }
 
-<p style="margin-top:2em;">For more information, see the <a href="https://developers.docusign.com/esign-rest-api/code-examples">DocuSign Developer Center Code Examples section</a>.</p>
+        .docusignIFrame {
+            border: 1px solid #cfc;
+            padding: 20px;
+            width: 1024px;
+            background-color: #cd9;
+        }
+
+        .top_cont {
+            width: 1124px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #myIFrame {
+            width: 1024px;
+            height: 700px;
+            display = '';
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Scenarios</h2>
+
+    <h4><a href="SendEnvelope">Send an envelope.</a> The signer will receive an email with the signing request.</h4>
+    <h4><a href="EmbeddedSigning">Embedded Signing Ceremony.</a> Add a signing page to your web app opening DocuSign website.</h4>
+    <script>
+        function myFunction() {
+            var x = document.getElementById('myIFrame');
+            if (x.style.visibility === 'hidden') {
+                x.style.visibility = 'visible';
+            } else {
+                x.style.visibility = 'hidden';
+            }
+            //alert(x.style.visibility);
+        }
+    </script>
+    <button onclick="myFunction()">Show/Hide iFrame</button>
+    <h4><a href="ListEnvelopes">List envelopes.</a> Lists the user's envelopes and their status.</h4>
+
+    <iframe class="myIFrame" id="myIFrame" src="https://demo.docusign.net/Signing/?insession=1&ti=a737c11dd1dd4c20afc93a166f97e7f1" style="visibility:hidden" />
+
+
+</body>
